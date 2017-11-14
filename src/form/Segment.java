@@ -1,5 +1,7 @@
 package form;
 
+import java.util.ArrayList;
+
 public class Segment extends Figure{
 
 
@@ -59,11 +61,14 @@ public class Segment extends Figure{
 	}
 
 	@Override
-	public Point[] getPoints() {
-		Point[] tab_points = new Point[2];
-		tab_points[0] = getDebut();
-		tab_points[1] = getFin();
-		return null;
+	public ArrayList<Point> getPoints() {
+		//		Point[] tab_points = new Point[2];
+		//		tab_points[0] = getDebut();
+		//		tab_points[1] = getFin();
+		ArrayList<Point> list_points = new ArrayList<>();
+		list_points.add(getDebut());
+		list_points.add(getFin());
+		return list_points;
 	}
 
 

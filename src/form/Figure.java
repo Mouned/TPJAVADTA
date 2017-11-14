@@ -1,11 +1,11 @@
 package form;
 
+import java.util.ArrayList;
+
 public abstract class Figure {
 
-	
+
 	public abstract void affiche();
-	
-	public abstract String toString();
-	
-	public abstract Point[] getPoints();
+
+	public abstract ArrayList<Point> getPoints();
 }
