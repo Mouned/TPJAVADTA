@@ -24,5 +24,9 @@ public class TestForme {
 		Surfacable surf = FigureUtil.getRandomSurfacable();
 		
 		surf.affiche();
+		
+		Point[] test_Tab = FigureUtil.getPoints(r1, r2, f, c, rec);
+		
+		System.out.println(FigureUtil.toStringTabPoints(test_Tab));
 	}
 }

@@ -1,7 +1,5 @@
 package utils;
 
-import java.math.*;
-
 import form.*;
 import interfaceUtils.Surfacable;
 
@@ -82,6 +80,35 @@ public class FigureUtil {
 
 	private static int getRandomValueLarg() {
 		return (int) (Math.random()*valueSeg);
+	}
+	
+	public static Point[] getPoints(Figure...figures) {
+		
+		Point[] tab_Points;
+		int cpt_Points = 0;
+		int index = 0;
+		for(Figure f : figures) {
+			cpt_Points += f.getPoints().length;
+		}
+		
+		tab_Points = new Point[cpt_Points];
+		
+		for(Figure f : figures) {
+			for(Point p : f.getPoints()) {
+				tab_Points[index] = p;
+				index++;
+			}
+		}
+		
+		return tab_Points;
+	}
+	
+	public static String toStringTabPoints(Point[] tab_Points) {
+		String s="[";
+		for(Point p : tab_Points)
+			s+=p.toString();
+		
+		return s+"]";
 	}
 
 }
