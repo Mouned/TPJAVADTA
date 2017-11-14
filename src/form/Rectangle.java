@@ -40,7 +40,7 @@ public class Rectangle extends Figure implements Surfacable {
 				+getPointHautDroite().toString();
 	}
 
-	public String getType() {
+	protected String getType() {
 		return "RECT";
 	}
 
@@ -61,5 +61,11 @@ public class Rectangle extends Figure implements Surfacable {
 		list_points.add(getPointHautDroite());
 		list_points.add(getPointHautGauche());
 		return list_points;
+	}
+
+	@Override
+	public boolean couvre(Point p) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

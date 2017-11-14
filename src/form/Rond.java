@@ -48,4 +48,10 @@ public class Rond extends Figure implements Surfacable {
 		list_points.add(getCentre());
 		return list_points;
 	}
+
+	@Override
+	public boolean couvre(Point p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

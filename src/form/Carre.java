@@ -8,7 +8,7 @@ public class Carre extends Rectangle implements Surfacable{
 		super(pointBasGauche,cote,cote);
 	}
 
-	public String getType() {
+	protected String getType() {
 		return "CARRE";
 	}
 }

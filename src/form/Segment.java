@@ -71,5 +71,9 @@ public class Segment extends Figure{
 		return list_points;
 	}
 
+	@Override
+	public boolean couvre(Point p) {
+		return false;
+	}
 
 }
