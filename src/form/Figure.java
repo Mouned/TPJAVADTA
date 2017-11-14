@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public abstract class Figure {
 
-
 	public abstract void affiche();
 
 	public abstract ArrayList<Point> getPoints();
