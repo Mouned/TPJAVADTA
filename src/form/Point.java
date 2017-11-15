@@ -50,5 +50,9 @@ public class Point {
 	public boolean isEqualPoint(Point otherPoint) {
 		return ( getAbscisse()==otherPoint.getAbscisse() && getOrdonnee()==otherPoint.getOrdonnee() ); 
 	}
+	
+	public double distance(Point p) {
+		return Math.sqrt( Math.pow(p.getAbscisse()-getAbscisse(), 2) + Math.pow(p.getOrdonnee()-getOrdonnee(), 2) );
+	}
 
 }

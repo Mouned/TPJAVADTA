@@ -70,15 +70,15 @@ public class FigureUtil {
 	}
 
 	private static int getRandomValueX() {
-		return (int) (Math.random()*valueX);
+		return (int) (Math.round((Math.random()*valueX)));
 	}
 
 	private static int getRandomValueY() {
-		return (int) (Math.random()*valueY);
+		return (int) (Math.round((Math.random()*valueY)));
 	}
 
 	private static int getRandomValueLong() {
-		return (int) (Math.random()*valueSeg);
+		return (int) (Math.round((Math.random()*valueSeg)));
 	}
 
 	private static int getRandomValueLarg() {

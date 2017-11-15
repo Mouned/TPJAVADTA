@@ -20,11 +20,9 @@ public class Rond extends Figure implements Surfacable {
 	}
 
 
-
 	public int getRayon() {
 		return rayon;
 	}
-
 
 
 	public String toString() {
@@ -51,7 +49,8 @@ public class Rond extends Figure implements Surfacable {
 
 	@Override
 	public boolean couvre(Point p) {
-		// TODO Auto-generated method stub
-		return false;
+		// Comparaison de la distance entre les deux points et le rayon du cercle
+		System.out.println(getCentre().distance(p));
+		return Math.round(getCentre().distance(p)) <= getRayon();
 	}
 }

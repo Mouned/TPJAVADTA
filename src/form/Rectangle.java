@@ -65,7 +65,13 @@ public class Rectangle extends Figure implements Surfacable {
 
 	@Override
 	public boolean couvre(Point p) {
-		// TODO Auto-generated method stub
-		return false;
+		// P est dans le rectangle/carre si ses coordonnees sont comprises dans celles des extremites du rectangle/carre
+		boolean supPointBasGauche = p.getAbscisse() >= getPointBasGauche().getAbscisse()
+								&&  p.getOrdonnee() >= getPointBasGauche().getOrdonnee();
+	
+	   boolean infPointHautDroite = p.getAbscisse() <= getPointHautDroite().getAbscisse()
+			                   &&   p.getOrdonnee() <= getPointHautDroite().getOrdonnee();
+	   
+	   return supPointBasGauche && infPointHautDroite;
 	}
 }
