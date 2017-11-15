@@ -15,39 +15,38 @@ public class Segment extends Figure{
 		debut = p;
 		longueur=lon;
 		horizontal=horiz;
+		fin = new Point(p.getAbscisse() + (horizontal?longueur:0),p.getOrdonnee() + (horizontal?0:longueur));
 
-		if(horiz) {
-			fin = new Point(debut.getAbscisse()+lon,debut.getOrdonnee());
-		}
-		else {
-			fin = new Point(debut.getAbscisse(),debut.getOrdonnee()+lon);
-		}
+		//		if(horiz) {
+		//			fin = new Point(debut.getAbscisse()+lon,debut.getOrdonnee());
+		//		}
+		//		else {
+		//			fin = new Point(debut.getAbscisse(),debut.getOrdonnee()+lon);
+		//		}
+		//		
+	}
 
+	public Segment(Point p1, Point p2) {
+		debut = p1;
+		fin = p2;
+		longueur = (int)(Math.round(p1.distance(p2)));
 	}
 
 	public Point getDebut() {
 		return debut;
 	}
 
-
-
 	public Point getFin() {
 		return fin;
 	}
-
-
 
 	public int getLongueur() {
 		return longueur;
 	}
 
-
-
 	public boolean isHorizontal() {
 		return horizontal;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -79,7 +78,7 @@ public class Segment extends Figure{
 				}
 			}
 		}
-		
+
 		if(!isHorizontal()) {
 			if(debut.getOrdonnee() > fin.getOrdonnee()) {
 				if(p.getOrdonnee() <= debut.getOrdonnee() && p.getOrdonnee() >= fin.getOrdonnee()) {
@@ -96,18 +95,17 @@ public class Segment extends Figure{
 	}
 
 	public boolean equals(Object obj) {
-	    if(obj instanceof Segment) {
-	    	Segment otherSegment = (Segment) obj;
-	    	return getDebut().equals(otherSegment.getDebut())
-	    			&& getFin().equals(otherSegment.getFin());
-	    }
+		if(obj instanceof Segment) {
+			Segment otherSegment = (Segment) obj;
+			return getDebut().equals(otherSegment.getDebut())
+					&& getFin().equals(otherSegment.getFin());
+		}
 		return false;
 	}
 
-	@Override
 	public Point getCentre() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Point( (getDebut().getAbscisse() + getFin().getAbscisse()) / 2 , 
+				(getDebut().getOrdonnee() + getFin().getOrdonnee()) / 2);
 	}
 
 }

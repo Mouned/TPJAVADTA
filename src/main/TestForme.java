@@ -30,7 +30,7 @@ public class TestForme {
 		surf.affiche();
 
 		ArrayList<Point> test_List = FigureUtil.getPoints(r1, r2, f, c, rec);
-
+		
 		System.out.println(FigureUtil.toStringTabPoints(test_List));
 		
 		Point p = new Point(11,11);
@@ -52,5 +52,9 @@ public class TestForme {
 		
 		System.out.println(seg1.couvre(new Point(1,5)));
 		System.out.println(seg2.couvre(new Point(5,1)));
+		
+		
+		FigureUtil.deplaceAllFigure(test_List, 5, 5);
+		System.out.println(FigureUtil.toStringTabPoints(test_List));
 	}
 }

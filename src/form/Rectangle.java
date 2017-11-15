@@ -94,7 +94,7 @@ public class Rectangle extends Figure implements Surfacable {
 
 	@Override
 	public Point getCentre() {
-		// TODO Auto-generated method stub
-		return null;
+		Segment diagonale = new Segment(getPointBasGauche(), getPointHautDroite());
+		return diagonale.getCentre();
 	}
 }

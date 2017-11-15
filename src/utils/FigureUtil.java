@@ -16,11 +16,11 @@ public class FigureUtil {
 
 		double valueRand = Math.random()*rand;
 
-		if(valueRand > 0 && valueRand < 3)
+		if(valueRand < rand/4)
 			return getRandomRond();
-		else if(valueRand >= 3 && valueRand < 6)
+		else if(valueRand < 2*rand/4)
 			return getRandomRectangle();
-		else if(valueRand >= 6 && valueRand < 9)
+		else if(valueRand < 3*rand/4)
 			return getRandomCarre();
 		else
 			return getRandomSegment();
@@ -28,11 +28,11 @@ public class FigureUtil {
 
 	public static Surfacable getRandomSurfacable() {
 
-		double valueRand = Math.random()*rand;
+		double valueRand = Math.random();
 
-		if(valueRand > 0 && valueRand < 4)
+		if(valueRand < rand/3)
 			return getRandomRond();
-		else if(valueRand >= 4 && valueRand < 7)
+		else if(valueRand < 2*rand/3)
 			return getRandomRectangle();
 		else 
 			return getRandomCarre();
@@ -106,6 +106,10 @@ public class FigureUtil {
 
 		return list_Points;
 		//return tab_Points;
+	}
+	
+	public static void deplaceAllFigure(ArrayList<Point> list_Point, int deltaX, int deltaY) {
+		list_Point.forEach(point -> point.deplace(deltaX, deltaY));
 	}
 
 	public static String toStringTabPoints(ArrayList<Point> tab_Points) {
