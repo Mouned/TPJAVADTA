@@ -54,10 +54,6 @@ public class Rectangle extends Figure implements Surfacable {
 		return "RECT";
 	}
 
-	public void affiche() {
-		System.out.println(toString());
-	}
-
 	@Override
 	public double surface() {
 		return longueur*largeur;
@@ -94,5 +90,11 @@ public class Rectangle extends Figure implements Surfacable {
 					&& getLargeur() == otherRectangle.getLargeur();
 		}
 		return false;
+	}
+
+	@Override
+	public Point getCentre() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

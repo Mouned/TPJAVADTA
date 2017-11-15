@@ -29,10 +29,6 @@ public class Rond extends Figure implements Surfacable {
 		return "[Rond "+centre.toString()+", "+rayon+"]";
 	}
 
-	public void affiche() {
-		System.out.println(toString());
-	}
-
 	@Override
 	public double surface() {
 		return (Math.PI)*(Math.pow(rayon, 2));

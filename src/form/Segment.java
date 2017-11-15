@@ -55,12 +55,6 @@ public class Segment extends Figure{
 	}
 
 	@Override
-	public void affiche() {
-		System.out.println(toString());
-
-	}
-
-	@Override
 	public ArrayList<Point> getPoints() {
 		//		Point[] tab_points = new Point[2];
 		//		tab_points[0] = getDebut();
@@ -108,6 +102,12 @@ public class Segment extends Figure{
 	    			&& getFin().equals(otherSegment.getFin());
 	    }
 		return false;
+	}
+
+	@Override
+	public Point getCentre() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
