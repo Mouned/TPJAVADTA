@@ -1,5 +1,6 @@
 package form;
 
+
 public class Point {
 
 	private int abscisse;
@@ -47,12 +48,18 @@ public class Point {
 		return "["+getAbscisse()+";"+getOrdonnee()+"]";
 	}
 
-	public boolean isEqualPoint(Point otherPoint) {
-		return ( getAbscisse()==otherPoint.getAbscisse() && getOrdonnee()==otherPoint.getOrdonnee() ); 
+	public boolean equals(Object obj) {
+
+		if(obj instanceof Point) {
+			Point otherPoint = (Point) obj;
+			return ( getAbscisse()==otherPoint.getAbscisse() && getOrdonnee()==otherPoint.getOrdonnee() ); 
+		}
+		
+		return false;
 	}
-	
-	public double distance(Point p) {
-		return Math.sqrt( Math.pow(p.getAbscisse()-getAbscisse(), 2) + Math.pow(p.getOrdonnee()-getOrdonnee(), 2) );
+
+	public double distance(Point otherPoint) {
+		return Math.sqrt( Math.pow(otherPoint.getAbscisse()-getAbscisse(), 2) + Math.pow(otherPoint.getOrdonnee()-getOrdonnee(), 2) );
 	}
 
 }

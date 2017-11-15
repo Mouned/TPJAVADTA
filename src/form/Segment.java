@@ -73,6 +73,40 @@ public class Segment extends Figure{
 
 	@Override
 	public boolean couvre(Point p) {
+		if(isHorizontal()) {
+			if(debut.getAbscisse() > fin.getAbscisse()) {
+				if(p.getAbscisse() <= debut.getAbscisse() && p.getAbscisse() >= fin.getAbscisse()) {
+					return p.getOrdonnee() == debut.getOrdonnee();
+				}
+			}
+			if(debut.getAbscisse() < fin.getAbscisse()) {
+				if(p.getAbscisse() >= debut.getAbscisse() && p.getAbscisse() <= fin.getAbscisse()) {
+					return p.getOrdonnee() == debut.getOrdonnee();
+				}
+			}
+		}
+		
+		if(!isHorizontal()) {
+			if(debut.getOrdonnee() > fin.getOrdonnee()) {
+				if(p.getOrdonnee() <= debut.getOrdonnee() && p.getOrdonnee() >= fin.getOrdonnee()) {
+					return p.getAbscisse() == debut.getAbscisse();
+				}
+			}
+			if(debut.getOrdonnee() < fin.getOrdonnee()) {
+				if(p.getOrdonnee() >= debut.getOrdonnee() && p.getOrdonnee() <= fin.getOrdonnee()) {
+					return p.getAbscisse() == debut.getAbscisse();
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean equals(Object obj) {
+	    if(obj instanceof Segment) {
+	    	Segment otherSegment = (Segment) obj;
+	    	return getDebut().equals(otherSegment.getDebut())
+	    			&& getFin().equals(otherSegment.getFin());
+	    }
 		return false;
 	}
 

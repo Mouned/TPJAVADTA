@@ -32,15 +32,25 @@ public class TestForme {
 //		ArrayList<Point> test_List = FigureUtil.getPoints(r1, r2, f, c, rec);
 //
 //		System.out.println(FigureUtil.toStringTabPoints(test_List));
+//		
+//		Point p = new Point(11,11);
+//		Point p2 = new Point(8,11);
+//		Point p3 = new Point(8,11);
+//		
+//		Object o = p2;
+//		System.out.println(p3.equals(o));
+//		System.out.println(o.equals(p3));
+//		
+//		
+//		System.out.println(rec.couvre(p));
+//		System.out.println(rec.couvre(p2));
+//		System.out.println(r1.couvre(p));
+//		System.out.println(r1.couvre(p2));
 		
-		Rond r1 = new Rond(new Point(20,20),13);
-		Rectangle rec = new Rectangle(new Point(0,0),10,10);
-		Point p = new Point(11,11);
-		Point p2 = new Point(8,11);
+		Segment seg1 = new Segment(new Point(1,1), 10,true);
+		Segment seg2 = new Segment(new Point(1,1), 10,false);
 		
-		System.out.println(rec.couvre(p));
-		System.out.println(rec.couvre(p2));
-		System.out.println(r1.couvre(p));
-		System.out.println(r1.couvre(p2));
+		System.out.println(seg1.couvre(new Point(1,5)));
+		System.out.println(seg1.couvre(new Point(5,1)));
 	}
 }

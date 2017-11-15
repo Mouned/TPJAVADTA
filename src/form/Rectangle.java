@@ -17,6 +17,16 @@ public class Rectangle extends Figure implements Surfacable {
 		largeur = lag;
 	}
 
+	public int getLongueur() {
+		return longueur;
+	}
+
+
+	public int getLargeur() {
+		return largeur;
+	}
+
+
 	public Point getPointBasGauche() {
 		return pointBasGauche;
 	}
@@ -67,11 +77,22 @@ public class Rectangle extends Figure implements Surfacable {
 	public boolean couvre(Point p) {
 		// P est dans le rectangle/carre si ses coordonnees sont comprises dans celles des extremites du rectangle/carre
 		boolean supPointBasGauche = p.getAbscisse() >= getPointBasGauche().getAbscisse()
-								&&  p.getOrdonnee() >= getPointBasGauche().getOrdonnee();
-	
-	   boolean infPointHautDroite = p.getAbscisse() <= getPointHautDroite().getAbscisse()
-			                   &&   p.getOrdonnee() <= getPointHautDroite().getOrdonnee();
-	   
-	   return supPointBasGauche && infPointHautDroite;
+				&&  p.getOrdonnee() >= getPointBasGauche().getOrdonnee();
+
+				boolean infPointHautDroite = p.getAbscisse() <= getPointHautDroite().getAbscisse()
+						&&   p.getOrdonnee() <= getPointHautDroite().getOrdonnee();
+
+				return supPointBasGauche && infPointHautDroite;
+	}
+
+
+	public boolean equals(Object obj) {
+		if(obj instanceof Rectangle) {
+			Rectangle otherRectangle = (Rectangle) obj;
+			return getPointBasGauche().equals(otherRectangle.getPointBasGauche())
+					&& getLongueur() == otherRectangle.getLongueur()
+					&& getLargeur() == otherRectangle.getLargeur();
+		}
+		return false;
 	}
 }

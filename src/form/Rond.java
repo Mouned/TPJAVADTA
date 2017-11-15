@@ -50,7 +50,16 @@ public class Rond extends Figure implements Surfacable {
 	@Override
 	public boolean couvre(Point p) {
 		// Comparaison de la distance entre les deux points et le rayon du cercle
-		System.out.println(getCentre().distance(p));
 		return Math.round(getCentre().distance(p)) <= getRayon();
+	}
+
+
+	public boolean equals(Object obj) {
+		if(obj instanceof Rond) {
+			Rond otherRond = (Rond) obj;
+			return otherRond.getCentre().equals(getCentre()) 
+					&& otherRond.getRayon() == getRayon();
+		}
+		return false;
 	}
 }
