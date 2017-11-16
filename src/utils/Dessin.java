@@ -20,12 +20,10 @@ public class Dessin {
 		return list_figure;
 	}
 
-	public String toString() {
-		String res="";
-
-		for(Figure f : list_figure)
-			res+=f.toString()+"\n";
-
-		return res;
+	public void affiche() {
+		list_figure
+		.stream()
+		.forEach(f -> System.out.println(f.toString()));
+		System.out.println();
 	}
 }

@@ -14,9 +14,9 @@ public class TestForme {
 		ArrayList<Figure> list_figure = FigureUtil.genere(10);
 
 		Dessin dessin = new Dessin(list_figure);
-		System.out.println(dessin);
+		dessin.affiche();
 		FigureUtil.trieDominant(dessin);
-		System.out.println(dessin);
+		dessin.affiche();
 
 	}
 }
