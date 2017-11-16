@@ -50,7 +50,7 @@ public class Segment extends Figure{
 
 	@Override
 	public String toString() {
-		return "["+debut.toString()+" à "+fin.toString()+"]";
+		return "[SEG "+debut.toString()+" à "+fin.toString()+"]";
 	}
 
 	@Override
@@ -106,6 +106,11 @@ public class Segment extends Figure{
 	public Point getCentre() {
 		return new Point( (getDebut().getAbscisse() + getFin().getAbscisse()) / 2 , 
 				(getDebut().getOrdonnee() + getFin().getOrdonnee()) / 2);
+	}
+
+	@Override
+	public double distanceOrigine(Point p) {
+		return (debut.distance(p) > fin.distance(p) ? debut.distance(p) : fin.distance(p) );
 	}
 
 }

@@ -1,6 +1,8 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 import form.*;
 import interfaceUtils.Surfacable;
@@ -127,6 +129,29 @@ public class FigureUtil {
 			list_figure.add(getRandomFigure());
 
 		return list_figure;
+	}
+	
+	public static Figure getFigureEn(Point pointInDessin, Dessin dess) {
+		Figure figureCouvrePoint = null;
+		
+		Iterator<Figure> iterator_dessin = dess.getFigure().iterator();
+		
+		// On itère sur la liste de figure du dessin
+		while(iterator_dessin.hasNext()) {
+			// On vérifie si la figure courante couvre le point en paramètre
+			if((figureCouvrePoint = (Figure)(iterator_dessin.next())).couvre(pointInDessin))
+				// si c'est le cas, on renvoie la figure courante
+				return figureCouvrePoint;
+		}
+		
+		// si aucune figure du dessin ne couvre le point, on renvoie null
+		
+		return null;
+	}
+	
+	public static ArrayList<Figure> trieDominant(Dessin dessin){
+		Collections.sort(dessin.getFigure());
+		return dessin.getFigure();
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import interfaceUtils.Surfacable;
 
-public class Rectangle extends Figure implements Surfacable {
+public class Rectangle extends Figure implements Surfacable{
 
 
 	private Point pointBasGauche;
@@ -83,7 +83,7 @@ public class Rectangle extends Figure implements Surfacable {
 
 
 	public boolean equals(Object obj) {
-		if(obj instanceof Rectangle) {
+		if(obj instanceof Rectangle || obj instanceof Carre) {
 			Rectangle otherRectangle = (Rectangle) obj;
 			return getPointBasGauche().equals(otherRectangle.getPointBasGauche())
 					&& getLongueur() == otherRectangle.getLongueur()
@@ -97,4 +97,17 @@ public class Rectangle extends Figure implements Surfacable {
 		Segment diagonale = new Segment(getPointBasGauche(), getPointHautDroite());
 		return diagonale.getCentre();
 	}
+
+	@Override
+	public double distanceOrigine(Point p) {
+		double distanceMin = Double.MAX_VALUE;
+		double distance_Curr = 0.0;
+
+		for(Point rect_point : getPoints())
+			if((distance_Curr = rect_point.distance(p)) < distanceMin)
+				distanceMin = distance_Curr;
+
+		return distanceMin;
+	}
+
 }
