@@ -2,12 +2,10 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import couleur.Couleur;
 import form.Carre;
 import form.Figure;
 import form.Point;
@@ -22,6 +20,7 @@ public class FigureUtilMap {
 	private final static int valueY = 100;
 	private final static int valueSeg = 50;
 	private final static int rand = 12;
+	private final static int rand_Couleur = 15;
 
 	private static HashMap<Integer,Figure> map_figure = new HashMap<Integer,Figure>();
 
@@ -52,19 +51,19 @@ public class FigureUtilMap {
 	}
 
 	public static Rond getRandomRond() {
-		Rond randomRond = new Rond(getRandomPoint(), getRandomValueLong());
+		Rond randomRond = new Rond(getRandomPoint(), getRandomValueLong(),getRandomCouleur());
 		map_figure.put(randomRond.getId(), randomRond);
 		return randomRond;
 	}
 
 	public static Rectangle getRandomRectangle() {
-		Rectangle randomRectangle = new Rectangle(getRandomPoint(),getRandomValueLong(),getRandomValueLarg());
+		Rectangle randomRectangle = new Rectangle(getRandomPoint(),getRandomValueLong(),getRandomValueLarg(),getRandomCouleur());
 		map_figure.put(randomRectangle.getId(), randomRectangle);
 		return randomRectangle;
 	}
 
 	public static Carre getRandomCarre() {
-		Carre randomCarre = new Carre(getRandomPoint(),getRandomValueLong());
+		Carre randomCarre = new Carre(getRandomPoint(),getRandomValueLong(),getRandomCouleur());
 		map_figure.put(randomCarre.getId(), randomCarre);
 		return randomCarre;
 	}
@@ -74,10 +73,10 @@ public class FigureUtilMap {
 		Segment randomSegment;
 
 		if(rand > 0.5)
-			randomSegment = new Segment(getRandomPoint(),getRandomValueLong(),true);
+			randomSegment = new Segment(getRandomPoint(),getRandomValueLong(),true,getRandomCouleur());
 		else
-			randomSegment =  new Segment(getRandomPoint(),getRandomValueLong(),false);
-		
+			randomSegment =  new Segment(getRandomPoint(),getRandomValueLong(),false,getRandomCouleur());
+
 		map_figure.put(randomSegment.getId(), randomSegment);
 		return randomSegment;
 	}
@@ -105,6 +104,22 @@ public class FigureUtilMap {
 
 	private static int getRandomValueLarg() {
 		return (int) (Math.random()*valueSeg);
+	}
+
+	private static Couleur getRandomCouleur(){
+
+		double valueRand = Math.random()*rand_Couleur;
+
+		if(valueRand < rand_Couleur/5)
+			return Couleur.Rouge;
+		else if(valueRand < 2*rand_Couleur/5)
+			return Couleur.Vert;
+		else if(valueRand < 3*rand_Couleur/5)
+			return Couleur.Bleu;
+		else if(valueRand < 4*rand_Couleur/5)
+			return Couleur.Jaune;
+		else
+			return Couleur.Noir;
 	}
 
 	public static ArrayList<Point> getPoints(Figure...figures) {
@@ -180,21 +195,21 @@ public class FigureUtilMap {
 		Collections.sort(dessin.getFigure());
 		return dessin.getFigure();
 	}
-	
+
 	public static HashMap<Integer, Figure> getMapFigure(){
 		return map_figure;
 	}
-	
+
 	public static Figure getFigureIDMap(String id) {
 		Integer id_map = new Integer(Integer.parseInt(id));
-		
+
 		return getMapFigure().get(id_map);
 	}
-	
+
 	public static void afficheMap() {
 		for (HashMap.Entry<Integer, Figure> entry : getMapFigure().entrySet())
 		{
-		    System.out.println(entry.getKey() + "/" + entry.getValue().toString());
+			System.out.println(entry.getKey() + "/" + entry.getValue().toString());
 		}
 	}
 

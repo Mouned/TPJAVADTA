@@ -2,6 +2,7 @@ package form;
 
 import java.util.ArrayList;
 
+import couleur.Couleur;
 import interfaceUtils.Surfacable;
 
 public class Rectangle extends Figure implements Surfacable{
@@ -11,12 +12,15 @@ public class Rectangle extends Figure implements Surfacable{
 	private int longueur;
 	private int largeur;
 
-	public Rectangle(Point p, int lon, int lag) {
+	public Rectangle(Point p, int lon, int lag, Couleur c) {
+		super(c);
 		pointBasGauche = p;
 		longueur = lon;
 		largeur = lag;
-		id = cpt;
-		cpt++;
+	}
+
+	public Rectangle(Point p, int lon, int lag) {
+		this(p,lon,lag,Couleur.getCouleurDefaut());
 	}
 
 	public int getLongueur() {
@@ -49,7 +53,8 @@ public class Rectangle extends Figure implements Surfacable{
 		return "["+getType() +" "+getPointBasGauche().toString()
 				+getPointBasDroite().toString()+""
 				+getPointHautGauche().toString()+""
-				+getPointHautDroite().toString();
+				+getPointHautDroite().toString()+" ; "
+				+getCouleur()+"]";
 	}
 
 	protected String getType() {

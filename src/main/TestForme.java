@@ -14,12 +14,13 @@ public class TestForme {
 
 		Dessin dessin = new Dessin(list_figure);
 		dessin.affiche();
+		System.out.println();
 		//FigureUtil.trieDominant(dessin);
 		dessin.affiche();
-		
-		
-		FigureUtilMap.afficheMap();
-		System.out.println(FigureUtilMap.getFigureIDMap("8"));
+
+
+		//FigureUtilMap.afficheMap();
+		//System.out.println(FigureUtilMap.getFigureIDMap("8"));
 
 	}
 }

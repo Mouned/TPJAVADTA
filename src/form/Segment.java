@@ -2,6 +2,8 @@ package form;
 
 import java.util.ArrayList;
 
+import couleur.Couleur;
+
 public class Segment extends Figure{
 
 
@@ -11,13 +13,16 @@ public class Segment extends Figure{
 	private boolean horizontal;
 
 
-	public Segment(Point p, int lon, boolean horiz) {
+	public Segment(Point p, int lon, boolean horiz, Couleur c) {
+		super(c);
 		debut = p;
 		longueur=lon;
 		horizontal=horiz;
 		fin = new Point(p.getAbscisse() + (horizontal?longueur:0),p.getOrdonnee() + (horizontal?0:longueur));
-		id = cpt;
-		cpt++;	
+	}
+
+	public Segment(Point p, int lon, boolean horiz) {
+		this(p,lon,horiz,Couleur.getCouleurDefaut());
 	}
 
 	public Segment(Point p1, Point p2) {
@@ -44,7 +49,7 @@ public class Segment extends Figure{
 
 	@Override
 	public String toString() {
-		return "[SEG "+debut.toString()+" à "+fin.toString()+"]";
+		return "[SEG "+debut.toString()+" à "+fin.toString()+" ; "+getCouleur()+"]";
 	}
 
 	@Override

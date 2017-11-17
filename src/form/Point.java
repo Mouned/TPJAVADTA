@@ -54,14 +54,14 @@ public class Point {
 			Point otherPoint = (Point) obj;
 			return ( getAbscisse()==otherPoint.getAbscisse() && getOrdonnee()==otherPoint.getOrdonnee() ); 
 		}
-		
+
 		return false;
 	}
 
 	public double distance(Point otherPoint) {
 		return Math.sqrt( Math.pow(otherPoint.getAbscisse()-getAbscisse(), 2) + Math.pow(otherPoint.getOrdonnee()-getOrdonnee(), 2) );
 	}
-	
+
 	public int compareto(Point p) {
 		Point org = new Point(0,0);
 		if(p.distance(org) > distance(org))

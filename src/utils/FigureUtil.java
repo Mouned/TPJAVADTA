@@ -2,11 +2,9 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import couleur.Couleur;
 import form.Carre;
 import form.Figure;
 import form.Point;
@@ -21,6 +19,7 @@ public class FigureUtil {
 	private final static int valueY = 100;
 	private final static int valueSeg = 50;
 	private final static int rand = 12;
+	private final static int rand_Couleur = 15;
 
 	public static Figure getRandomFigure() {
 
@@ -49,15 +48,15 @@ public class FigureUtil {
 	}
 
 	public static Rond getRandomRond() {
-		return new Rond(getRandomPoint(), getRandomValueLong());
+		return new Rond(getRandomPoint(), getRandomValueLong(),getRandomCouleur());
 	}
 
 	public static Rectangle getRandomRectangle() {
-		return new Rectangle(getRandomPoint(),getRandomValueLong(),getRandomValueLarg());
+		return new Rectangle(getRandomPoint(),getRandomValueLong(),getRandomValueLarg(),getRandomCouleur());
 	}
 
 	public static Carre getRandomCarre() {
-		Carre c = new Carre(getRandomPoint(),getRandomValueLong());
+		Carre c = new Carre(getRandomPoint(),getRandomValueLong(),getRandomCouleur());
 		return c;
 	}
 
@@ -65,9 +64,9 @@ public class FigureUtil {
 		double rand = Math.random();
 
 		if(rand > 0.5)
-			return new Segment(getRandomPoint(),getRandomValueLong(),true);
+			return new Segment(getRandomPoint(),getRandomValueLong(),true,getRandomCouleur());
 		else
-			return new Segment(getRandomPoint(),getRandomValueLong(),false);
+			return new Segment(getRandomPoint(),getRandomValueLong(),false,getRandomCouleur());
 	}
 
 	private static Point getRandomPoint() {
@@ -93,6 +92,22 @@ public class FigureUtil {
 
 	private static int getRandomValueLarg() {
 		return (int) (Math.random()*valueSeg);
+	}
+
+	private static Couleur getRandomCouleur(){
+
+		double valueRand = Math.random()*rand_Couleur;
+
+		if(valueRand < rand_Couleur/5)
+			return Couleur.Rouge;
+		else if(valueRand < 2*rand_Couleur/5)
+			return Couleur.Vert;
+		else if(valueRand < 3*rand_Couleur/5)
+			return Couleur.Bleu;
+		else if(valueRand < 4*rand_Couleur/5)
+			return Couleur.Jaune;
+		else
+			return Couleur.Noir;
 	}
 
 	public static ArrayList<Point> getPoints(Figure...figures) {
@@ -161,12 +176,20 @@ public class FigureUtil {
 	}
 
 	public static ArrayList<Figure> trieProcheOrigine(Dessin dessin){
-//			return dessin.getFigure()
-//					.stream()
-//					.sorted((f1,f2) -> f1.compareTo(f2))
-//					.collect(Collectors.toList());
+		//			return dessin.getFigure()
+		//					.stream()
+		//					.sorted((f1,f2) -> f1.compareTo(f2))
+		//					.collect(Collectors.toList());
 		Collections.sort(dessin.getFigure());
 		return dessin.getFigure();
 	}
+
+	//	public static ArrayList<Surfacable> trieDominant(Dessin dessin){
+	//		return dessin.getFigure()
+	//			.stream()
+	//			.filter(f -> f instanceof Surfacable)
+	//			.sorted()
+	//			.collect(Collectors.toList());
+	//	}
 
 }
