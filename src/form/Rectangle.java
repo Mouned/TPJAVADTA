@@ -15,6 +15,8 @@ public class Rectangle extends Figure implements Surfacable{
 		pointBasGauche = p;
 		longueur = lon;
 		largeur = lag;
+		id = cpt;
+		cpt++;
 	}
 
 	public int getLongueur() {

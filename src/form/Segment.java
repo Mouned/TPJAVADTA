@@ -16,14 +16,8 @@ public class Segment extends Figure{
 		longueur=lon;
 		horizontal=horiz;
 		fin = new Point(p.getAbscisse() + (horizontal?longueur:0),p.getOrdonnee() + (horizontal?0:longueur));
-
-		//		if(horiz) {
-		//			fin = new Point(debut.getAbscisse()+lon,debut.getOrdonnee());
-		//		}
-		//		else {
-		//			fin = new Point(debut.getAbscisse(),debut.getOrdonnee()+lon);
-		//		}
-		//		
+		id = cpt;
+		cpt++;	
 	}
 
 	public Segment(Point p1, Point p2) {

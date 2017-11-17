@@ -13,6 +13,8 @@ public class Rond extends Figure implements Surfacable{
 	public Rond(Point p, int r) {
 		centre = p;
 		rayon = r;
+		id = cpt;
+		cpt++;
 	}
 
 	public Point getCentre() {

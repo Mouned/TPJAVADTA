@@ -23,7 +23,6 @@ public class Dessin {
 	public void affiche() {
 		list_figure
 		.stream()
-		.forEach(f -> System.out.println(f.toString()));
-		System.out.println();
+		.forEach(System.out::println);
 	}
 }

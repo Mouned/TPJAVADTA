@@ -6,7 +6,14 @@ public abstract class Figure implements Comparable<Figure>{
 
 	protected Point org = new Point(0,0);
 	
+	protected static int cpt = 0;
+	protected int id;
+	
 	public abstract Point getCentre();
+	
+	public int getId() {
+		return id;
+	}
 	
 	public void affiche() {
 		System.out.println(toString());
