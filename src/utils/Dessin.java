@@ -1,11 +1,16 @@
 package utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import form.Figure;
 
-public class Dessin {
+public class Dessin implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Figure> list_figure;	
 
 	public Dessin(ArrayList<Figure> list_figure) {
