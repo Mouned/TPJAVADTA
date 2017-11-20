@@ -11,6 +11,10 @@ public class Dessin {
 	public Dessin(ArrayList<Figure> list_figure) {
 		this.list_figure=list_figure;
 	}
+	
+	public Dessin() {
+		
+	}
 
 	public boolean add(Figure fig) {
 		return list_figure.add(fig);

@@ -1,8 +1,21 @@
 package utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
+import java.util.Optional;
 
 import couleur.Couleur;
 import form.Carre;
@@ -157,22 +170,21 @@ public class FigureUtil {
 		return list_figure;
 	}
 
-	public static Figure getFigureEn(Point pointInDessin, Dessin dess) {
-		Figure figureCouvrePoint = null;
-
-		Iterator<Figure> iterator_dessin = dess.getFigure().iterator();
-
-		// On itère sur la liste de figure du dessin
-		while(iterator_dessin.hasNext()) {
-			// On vérifie si la figure courante couvre le point en paramètre
-			if((figureCouvrePoint = (Figure)(iterator_dessin.next())).couvre(pointInDessin))
-				// si c'est le cas, on renvoie la figure courante
-				return figureCouvrePoint;
-		}
-
-		// si aucune figure du dessin ne couvre le point, on renvoie null
-
-		return null;
+	public static Optional<Figure> getFigureEn(Point pointInDessin, Dessin dess) {
+//		Optional<Figure> figureCouvrePoint = null;
+//
+//		Iterator<Figure> iterator_dessin = dess.getFigure().iterator();
+//
+//		// On itère sur la liste de figure du dessin
+//		while(iterator_dessin.hasNext()) {
+//			// On vérifie si la figure courante couvre le point en paramètre
+//			if((figureCouvrePoint = (Optional<Figure>)(iterator_dessin.next())).couvre(pointInDessin))
+//				// si c'est le cas, on renvoie la figure courante
+//				return figureCouvrePoint;
+//		}
+		return dess.getFigure().stream()
+				.filter(f -> f.couvre(pointInDessin))
+				.findFirst();
 	}
 
 	public static ArrayList<Figure> trieProcheOrigine(Dessin dessin){
@@ -191,5 +203,55 @@ public class FigureUtil {
 	//			.sorted()
 	//			.collect(Collectors.toList());
 	//	}
+	
+	
+	public static void imprime(Dessin dessin) throws IOException {
+		File file = new File("File_Dessin/MonDessin.save");
+		PrintWriter sortie = new PrintWriter(new FileOutputStream(file));
+		dessin.getFigure().stream()
+						.forEach(f -> sortie.println(f));
+		for(int x=0;x<valueX;x++){
+			sortie.print("=");
+		}
+		sortie.println();
+		for(int y=0;y<valueY;y++){
+			for(int x=0;x<valueX;x++){
+				Optional<Figure> figure = getFigureEn(new Point(x,y),dessin);
+				if(figure.isPresent()){
+					sortie.print(figure.get().getCouleur().toString());
+				} else {
+					sortie.print(" ");
+				}
+			}
+			sortie.println();
+		}
+		System.out.println("Impression sous " + file.getAbsolutePath());
+		sortie.close();
+		
+	}
+	
+	public static void sauvegarde(Dessin dessin)throws IOException{
+		File file = new File("File_Dessin/MonDessin.save");
+		ObjectOutputStream sortie = new ObjectOutputStream(new FileOutputStream(file));
+		
+		sortie.writeObject(dessin);		
+		System.out.println("Sauvegarde sous "+ file.getAbsolutePath());
+		
+		sortie.close();
+	}
+	
+	public static Dessin charge(String filename)throws IOException, ClassNotFoundException{
+		Dessin dessin;
+		
+		try {
+			ObjectInputStream entree = new ObjectInputStream(new FileInputStream(filename));
+			dessin = (Dessin) entree.readObject();
+			entree.close();
+		}catch (FileNotFoundException e) {
+			System.out.println("Fichier non trouvé : " + e.getMessage());
+			dessin = new Dessin();
+		}
+		return dessin;
+	}
 
 }
