@@ -3,6 +3,7 @@ package form;
 import java.util.ArrayList;
 
 import couleur.Couleur;
+import exception.PointInvalideCoordException;
 import interfaceUtils.Surfacable;
 
 public class Rond extends Figure implements Surfacable{
@@ -11,13 +12,13 @@ public class Rond extends Figure implements Surfacable{
 	private Point centre;
 	private int rayon;
 
-	public Rond(Point p, int r, Couleur c) {
+	public Rond(Point p, int r, Couleur c) throws PointInvalideCoordException {
 		super(c);
 		centre = p;
 		rayon = r;
 	}
 
-	public Rond(Point p, int r) {
+	public Rond(Point p, int r) throws PointInvalideCoordException {
 		this(p,r,Couleur.getCouleurDefaut());
 	}
 

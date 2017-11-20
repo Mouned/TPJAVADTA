@@ -3,6 +3,7 @@ package form;
 import java.util.ArrayList;
 
 import couleur.Couleur;
+import exception.PointInvalideCoordException;
 
 public class Segment extends Figure{
 
@@ -13,15 +14,20 @@ public class Segment extends Figure{
 	private boolean horizontal;
 
 
-	public Segment(Point p, int lon, boolean horiz, Couleur c) {
+	public Segment(Point p, int lon, boolean horiz, Couleur c) throws PointInvalideCoordException {
 		super(c);
 		debut = p;
 		longueur=lon;
 		horizontal=horiz;
-		fin = new Point(p.getAbscisse() + (horizontal?longueur:0),p.getOrdonnee() + (horizontal?0:longueur));
+		try {
+			fin = new Point(p.getAbscisse() + (horizontal?longueur:0),p.getOrdonnee() + (horizontal?0:longueur));
+		} catch (PointInvalideCoordException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public Segment(Point p, int lon, boolean horiz) {
+	public Segment(Point p, int lon, boolean horiz) throws PointInvalideCoordException {
 		this(p,lon,horiz,Couleur.getCouleurDefaut());
 	}
 
@@ -103,8 +109,14 @@ public class Segment extends Figure{
 	}
 
 	public Point getCentre() {
-		return new Point( (getDebut().getAbscisse() + getFin().getAbscisse()) / 2 , 
-				(getDebut().getOrdonnee() + getFin().getOrdonnee()) / 2);
+		try {
+			return new Point( (getDebut().getAbscisse() + getFin().getAbscisse()) / 2 , 
+					(getDebut().getOrdonnee() + getFin().getOrdonnee()) / 2);
+		} catch (PointInvalideCoordException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

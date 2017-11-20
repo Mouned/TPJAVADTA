@@ -3,20 +3,22 @@ package form;
 import java.util.ArrayList;
 
 import couleur.Couleur;
+import exception.PointInvalideCoordException;
 
 public abstract class Figure implements Comparable<Figure>{
 
-	protected Point org = new Point(0,0);
+	protected Point org;
 
 	protected static int cpt = 0;
 	protected int id = cpt++;
 	private Couleur couleur;
 
 	protected Figure() {
-
+		
 	}
 
-	protected Figure(Couleur c) {
+	protected Figure(Couleur c) throws PointInvalideCoordException {
+		org = new Point(0,0);
 		couleur = c; 
 	}
 

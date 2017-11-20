@@ -3,6 +3,7 @@ package form;
 import java.util.ArrayList;
 
 import couleur.Couleur;
+import exception.PointInvalideCoordException;
 import interfaceUtils.Surfacable;
 
 public class Rectangle extends Figure implements Surfacable{
@@ -12,14 +13,14 @@ public class Rectangle extends Figure implements Surfacable{
 	private int longueur;
 	private int largeur;
 
-	public Rectangle(Point p, int lon, int lag, Couleur c) {
+	public Rectangle(Point p, int lon, int lag, Couleur c) throws PointInvalideCoordException {
 		super(c);
 		pointBasGauche = p;
 		longueur = lon;
 		largeur = lag;
 	}
 
-	public Rectangle(Point p, int lon, int lag) {
+	public Rectangle(Point p, int lon, int lag) throws PointInvalideCoordException {
 		this(p,lon,lag,Couleur.getCouleurDefaut());
 	}
 
@@ -37,24 +38,30 @@ public class Rectangle extends Figure implements Surfacable{
 		return pointBasGauche;
 	}
 
-	public Point getPointBasDroite() {
+	public Point getPointBasDroite() throws PointInvalideCoordException {
 		return new Point(pointBasGauche.getAbscisse()+longueur,pointBasGauche.getOrdonnee());
 	}
 
-	public Point getPointHautGauche() {
+	public Point getPointHautGauche() throws PointInvalideCoordException {
 		return new Point(pointBasGauche.getAbscisse(),pointBasGauche.getOrdonnee()+largeur);
 	}
 
-	public Point getPointHautDroite() {
+	public Point getPointHautDroite() throws PointInvalideCoordException {
 		return new Point(pointBasGauche.getAbscisse()+longueur,pointBasGauche.getOrdonnee()+largeur);
 	}
 
 	public String toString() {
-		return "["+getType() +" "+getPointBasGauche().toString()
-				+getPointBasDroite().toString()+""
-				+getPointHautGauche().toString()+""
-				+getPointHautDroite().toString()+" ; "
-				+getCouleur()+"]";
+		try {
+			return "["+getType() +" "+getPointBasGauche().toString()
+					+getPointBasDroite().toString()+""
+					+getPointHautGauche().toString()+""
+					+getPointHautDroite().toString()+" ; "
+					+getCouleur()+"]";
+		}catch (PointInvalideCoordException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	protected String getType() {
@@ -69,23 +76,35 @@ public class Rectangle extends Figure implements Surfacable{
 	@Override
 	public ArrayList<Point> getPoints() {
 		ArrayList<Point> list_points = new ArrayList<>();
-		list_points.add(getPointBasGauche());
-		list_points.add(getPointBasDroite());
-		list_points.add(getPointHautDroite());
-		list_points.add(getPointHautGauche());
+		try {
+			list_points.add(getPointBasGauche());
+			list_points.add(getPointBasDroite());
+			list_points.add(getPointHautDroite());
+			list_points.add(getPointHautGauche());
+
+		} catch(PointInvalideCoordException e) {
+			e.printStackTrace();
+		}
+
 		return list_points;
 	}
 
 	@Override
 	public boolean couvre(Point p) {
 		// P est dans le rectangle/carre si ses coordonnees sont comprises dans celles des extremites du rectangle/carre
-		boolean supPointBasGauche = p.getAbscisse() >= getPointBasGauche().getAbscisse()
-				&&  p.getOrdonnee() >= getPointBasGauche().getOrdonnee();
 
-				boolean infPointHautDroite = p.getAbscisse() <= getPointHautDroite().getAbscisse()
-						&&   p.getOrdonnee() <= getPointHautDroite().getOrdonnee();
+		try  {
+			boolean supPointBasGauche = p.getAbscisse() >= getPointBasGauche().getAbscisse()
+					&&  p.getOrdonnee() >= getPointBasGauche().getOrdonnee();
 
-				return supPointBasGauche && infPointHautDroite;
+					boolean infPointHautDroite = p.getAbscisse() <= getPointHautDroite().getAbscisse()
+							&&   p.getOrdonnee() <= getPointHautDroite().getOrdonnee();
+
+					return supPointBasGauche && infPointHautDroite;
+		}catch(PointInvalideCoordException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 
@@ -101,8 +120,15 @@ public class Rectangle extends Figure implements Surfacable{
 
 	@Override
 	public Point getCentre() {
-		Segment diagonale = new Segment(getPointBasGauche(), getPointHautDroite());
-		return diagonale.getCentre();
+		Segment diagonale;
+		try {
+			diagonale = new Segment(getPointBasGauche(), getPointHautDroite());
+			return diagonale.getCentre();
+		} catch (PointInvalideCoordException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

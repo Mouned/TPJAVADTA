@@ -8,16 +8,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
 import couleur.Couleur;
+import exception.PointInvalideCoordException;
 import form.Carre;
 import form.Figure;
 import form.Point;
@@ -34,7 +30,7 @@ public class FigureUtil {
 	private final static int rand = 12;
 	private final static int rand_Couleur = 15;
 
-	public static Figure getRandomFigure() {
+	public static Figure getRandomFigure() throws PointInvalideCoordException {
 
 		double valueRand = Math.random()*rand;
 
@@ -48,7 +44,7 @@ public class FigureUtil {
 			return getRandomSegment();
 	}
 
-	public static Surfacable getRandomSurfacable() {
+	public static Surfacable getRandomSurfacable() throws PointInvalideCoordException {
 
 		double valueRand = Math.random();
 
@@ -60,20 +56,20 @@ public class FigureUtil {
 			return getRandomCarre();
 	}
 
-	public static Rond getRandomRond() {
+	public static Rond getRandomRond() throws PointInvalideCoordException {
 		return new Rond(getRandomPoint(), getRandomValueLong(),getRandomCouleur());
 	}
 
-	public static Rectangle getRandomRectangle() {
+	public static Rectangle getRandomRectangle() throws PointInvalideCoordException {
 		return new Rectangle(getRandomPoint(),getRandomValueLong(),getRandomValueLarg(),getRandomCouleur());
 	}
 
-	public static Carre getRandomCarre() {
+	public static Carre getRandomCarre() throws PointInvalideCoordException {
 		Carre c = new Carre(getRandomPoint(),getRandomValueLong(),getRandomCouleur());
 		return c;
 	}
 
-	public static Segment getRandomSegment() {
+	public static Segment getRandomSegment() throws PointInvalideCoordException {
 		double rand = Math.random();
 
 		if(rand > 0.5)
@@ -82,7 +78,7 @@ public class FigureUtil {
 			return new Segment(getRandomPoint(),getRandomValueLong(),false,getRandomCouleur());
 	}
 
-	private static Point getRandomPoint() {
+	private static Point getRandomPoint() throws PointInvalideCoordException {
 		Point randomPoint;
 
 		int valX = getRandomValueX();
@@ -161,7 +157,7 @@ public class FigureUtil {
 		return s+"]";
 	}
 
-	public static ArrayList<Figure> genere(int nb_Figure){
+	public static ArrayList<Figure> genere(int nb_Figure) throws PointInvalideCoordException{
 		ArrayList<Figure> list_figure = new ArrayList<>();
 
 		for(int index = 0; index < nb_Figure ; index++)
@@ -205,7 +201,7 @@ public class FigureUtil {
 	//	}
 	
 	
-	public static void imprime(Dessin dessin) throws IOException {
+	public static void imprime(Dessin dessin) throws IOException, PointInvalideCoordException {
 		File file = new File("File_Dessin/MonDessin.save");
 		PrintWriter sortie = new PrintWriter(new FileOutputStream(file));
 		dessin.getFigure().stream()

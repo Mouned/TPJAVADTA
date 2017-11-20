@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import couleur.Couleur;
+import exception.PointInvalideCoordException;
 import form.Carre;
 import form.Figure;
 import form.Point;
@@ -24,7 +25,7 @@ public class FigureUtilMap {
 
 	private static HashMap<Integer,Figure> map_figure = new HashMap<Integer,Figure>();
 
-	public static Figure getRandomFigure() {
+	public static Figure getRandomFigure() throws PointInvalideCoordException {
 
 		double valueRand = Math.random()*rand;
 
@@ -38,7 +39,7 @@ public class FigureUtilMap {
 			return getRandomSegment();
 	}
 
-	public static Surfacable getRandomSurfacable() {
+	public static Surfacable getRandomSurfacable() throws PointInvalideCoordException {
 
 		double valueRand = Math.random();
 
@@ -50,25 +51,25 @@ public class FigureUtilMap {
 			return getRandomCarre();
 	}
 
-	public static Rond getRandomRond() {
+	public static Rond getRandomRond() throws PointInvalideCoordException {
 		Rond randomRond = new Rond(getRandomPoint(), getRandomValueLong(),getRandomCouleur());
 		map_figure.put(randomRond.getId(), randomRond);
 		return randomRond;
 	}
 
-	public static Rectangle getRandomRectangle() {
+	public static Rectangle getRandomRectangle() throws PointInvalideCoordException {
 		Rectangle randomRectangle = new Rectangle(getRandomPoint(),getRandomValueLong(),getRandomValueLarg(),getRandomCouleur());
 		map_figure.put(randomRectangle.getId(), randomRectangle);
 		return randomRectangle;
 	}
 
-	public static Carre getRandomCarre() {
+	public static Carre getRandomCarre() throws PointInvalideCoordException {
 		Carre randomCarre = new Carre(getRandomPoint(),getRandomValueLong(),getRandomCouleur());
 		map_figure.put(randomCarre.getId(), randomCarre);
 		return randomCarre;
 	}
 
-	public static Segment getRandomSegment() {
+	public static Segment getRandomSegment() throws PointInvalideCoordException {
 		double rand = Math.random();
 		Segment randomSegment;
 
@@ -81,7 +82,7 @@ public class FigureUtilMap {
 		return randomSegment;
 	}
 
-	private static Point getRandomPoint() {
+	private static Point getRandomPoint() throws PointInvalideCoordException {
 		Point randomPoint;
 
 		int valX = getRandomValueX();
@@ -160,7 +161,7 @@ public class FigureUtilMap {
 		return s+"]";
 	}
 
-	public static ArrayList<Figure> genere(int nb_Figure){
+	public static ArrayList<Figure> genere(int nb_Figure) throws PointInvalideCoordException{
 		ArrayList<Figure> list_figure = new ArrayList<>();
 
 		for(int index = 0; index < nb_Figure ; index++)

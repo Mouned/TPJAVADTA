@@ -1,5 +1,6 @@
 package form;
 
+import exception.*;
 
 public class Point {
 
@@ -10,12 +11,13 @@ public class Point {
 	private final static int INIT_Y = 25;
 
 
-	public Point(int x, int y) {
+	public Point(int x, int y) throws PointInvalideCoordException {
+		if(x < 0 || y < 0) throw new PointInvalideCoordException();
 		abscisse = x;
 		ordonnee = y;
 	}
 
-	public Point() {
+	public Point() throws PointInvalideCoordException {
 		this(INIT_X,INIT_Y);
 	}
 
@@ -62,7 +64,7 @@ public class Point {
 		return Math.sqrt( Math.pow(otherPoint.getAbscisse()-getAbscisse(), 2) + Math.pow(otherPoint.getOrdonnee()-getOrdonnee(), 2) );
 	}
 
-	public int compareto(Point p) {
+	public int compareto(Point p) throws PointInvalideCoordException {
 		Point org = new Point(0,0);
 		if(p.distance(org) > distance(org))
 			return 1;
